@@ -1,0 +1,12 @@
+1.1
+The topography index wetness index is a method to measure the effect of topography on hydrological processes by dividing the local upslope area draining through the slope in radiants. The results show how much a water is draining relatively to its surrounding.
+1.2. The results don't show velocity or depth but potential areas of flood zones, that need to be investigated more. The values are relatively towards their surroundings and only make relative probabilities visible.
+
+2.
+QGIS: The TWI can be calculated with the assistance of the QGIS-SAGA-Plugin and the QGIS-GRASS-Plugin for the topograhpic wetness index (r.topidx, SAGA Wetness Index).
+
+Python: pyDEM
+
+R: dynatopmodel, topoWetnessIndex
+
+
