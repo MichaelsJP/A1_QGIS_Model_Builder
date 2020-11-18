@@ -11,6 +11,65 @@ Write the answers to the questions in a new markdown file called answers2.md. If
 ```
 $ gdalinfo raster.tif
 ```
+```
+Driver: GTiff/GeoTIFF
+Files: data/n45_e013_1arc_v3.tif
+Size is 3601, 3601
+Coordinate System is:
+GEOGCRS["WGS 84",
+    DATUM["World Geodetic System 1984",
+        ELLIPSOID["WGS 84",6378137,298.257223563,
+            LENGTHUNIT["metre",1]]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["geodetic latitude (Lat)",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["geodetic longitude (Lon)",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+    ID["EPSG",4326]]
+Data axis to CRS axis mapping: 2,1
+Origin = (12.999861111111111,46.000138888888884)
+Pixel Size = (0.000277777777778,-0.000277777777778)
+Metadata:
+  AREA_OR_POINT=Point
+  DTED_CompilationDate=0002
+  DTED_DataEdition=02
+  DTED_DigitizingSystem=SRTM      
+  DTED_HorizontalAccuracy=0009
+  DTED_HorizontalDatum=WGS84
+  DTED_MaintenanceDate=0000
+  DTED_MaintenanceDescription=0000
+  DTED_MatchMergeDate=0000
+  DTED_MatchMergeVersion=A
+  DTED_NimaDesignator=DTED2
+  DTED_OriginLatitude=0450000N
+  DTED_OriginLongitude=0130000E
+  DTED_Producer=USCNIMA 
+  DTED_RelHorizontalAccuracy=NA  
+  DTED_RelVerticalAccuracy=0005
+  DTED_SecurityCode_DSI=U
+  DTED_SecurityCode_UHL=U  
+  DTED_UniqueRef_DSI=F02 091        
+  DTED_UniqueRef_UHL=F02 091     
+  DTED_VerticalAccuracy_ACC=0004
+  DTED_VerticalAccuracy_UHL=0004
+  DTED_VerticalDatum=E96
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (  12.9998611,  46.0001389) ( 12d59'59.50"E, 46d 0' 0.50"N)
+Lower Left  (  12.9998611,  44.9998611) ( 12d59'59.50"E, 44d59'59.50"N)
+Upper Right (  14.0001389,  46.0001389) ( 14d 0' 0.50"E, 46d 0' 0.50"N)
+Lower Right (  14.0001389,  44.9998611) ( 14d 0' 0.50"E, 44d59'59.50"N)
+Center      (  13.5000000,  45.5000000) ( 13d30' 0.00"E, 45d30' 0.00"N)
+Band 1 Block=3601x1 Type=Int16, ColorInterp=Gray
+  NoData Value=-32767
+  Unit Type: m
+
+```
 
 ### 1. Preparation 
 
@@ -52,8 +111,14 @@ Download the data for this assignment from [heiBox](https://heibox.uni-heidelber
 Use the command `gdalinfo` to answer the following questions about the **two DEM files**, e.g.
 
 1. What is the coordinate reference system (EPSG)? 
+- `n45_e013_1arc_v3.tif`: 4326
+- `N45E014.hgt`: 4326
 2. What is the driver (file format)?
+- `n45_e013_1arc_v3.tif`: `GTiff/GeoTIFF`
+- `N45E014.hgt`: `SRTMHGT/SRTMHGT`
 3. What is the spatial resolution? (Don't forget to provide the units)
+- `n45_e013_1arc_v3.tif`: `3601 x 3601 m`
+- `N45E014.hgt`: `3601 x 3601 m`
 
 #### 2.2 Creating a raster mosaic [4pt]
 
