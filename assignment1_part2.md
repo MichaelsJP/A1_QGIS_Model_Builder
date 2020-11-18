@@ -123,10 +123,20 @@ Use the command `gdalinfo` to answer the following questions about the **two DEM
 #### 2.2 Creating a raster mosaic [4pt]
 
 1. Create a raster mosaic of the files _N45E014.hgt_ and _n45_e013_1arc_v3.tif_ using the command `gdal_merge`. The output file should be called _dem\_merge.tif_. 
+```
+gdal_merge.py -o dem_merge.tif data/n45_e013_1arc_v3.tif data/N45E014.hgt 
+```
 2. Create a raster mosaic of the files _N45E014.hgt_ and _n45_e013_1arc_v3.tif_ using the command `gdalbuildvrt`. The output file should be called _dem\_buildvrt.vrt_. 
+```
+gdalbuildvrt -separate dem_buildvrt.vrt data/n45_e013_1arc_v3.tif data/N45E014.hgt
+```
 3. Answer the following questions based on the results and the GDAL documentation: 
 	* What is the difference between the two output files? 
+	- `gdalbuildvrt` only links external files together in an xml format.
+	- `gdalberge` physically merges the data of the given sources into one new file.
 	* What might be an advantage of using `gdalbuildvrt` instead of `gdalmerge`?
+	- `gdalbuildvrt` is initially faster when combining the data sets and more resource friendly. 
+	- `gdalmerge` is initially slower when merging the data but is significantly faster when applying algorithms on the combined data set. 
  
 ### 3. Creating a GDAL/OGR script   
 
