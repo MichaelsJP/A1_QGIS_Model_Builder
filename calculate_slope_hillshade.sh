@@ -5,5 +5,7 @@ ogrinfo koper.shp koper -so
 
 gdalwarp -overwrite -cutline koper.shp -crop_to_cutline  -s_srs EPSG:4326 -t_srs EPSG:32632 dem_merge.tif dem_merge_clip.tif
 
-gdaldem hillshade dem_merge_clip.tif dem_merge_clip_hillshade
+gdaldem slope dem_merge_clip.tif dem_merge_clip_slope.tif
+
+gdaldem hillshade dem_merge_clip_slope.tif dem_merge_clip_slope_hillshade.tif
 

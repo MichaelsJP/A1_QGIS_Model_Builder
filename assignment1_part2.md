@@ -133,10 +133,10 @@ gdalbuildvrt -separate dem_buildvrt.vrt data/n45_e013_1arc_v3.tif data/N45E014.h
 3. Answer the following questions based on the results and the GDAL documentation: 
 	* What is the difference between the two output files? 
 	- `gdalbuildvrt` only links external files together in an xml format.
-	- `gdalberge` physically merges the data of the given sources into one new file.
-	* What might be an advantage of using `gdalbuildvrt` instead of `gdalmerge`?
+	- `gdal_merge` physically merges the data of the given sources into one new file.
+	* What might be an advantage of using `gdalbuildvrt` instead of `gdal_merge`?
 	- `gdalbuildvrt` is initially faster when combining the data sets and more resource friendly. 
-	- `gdalmerge` is initially slower when merging the data but is significantly faster when applying algorithms on the combined data set. 
+	- `gdal_merge` is initially slower when merging the data but is significantly faster when applying algorithms on the combined data set. 
  
 ### 3. Creating a GDAL/OGR script   
 
@@ -149,27 +149,35 @@ Create a file called _calculate\_slope\_hillshade.bat_ on Windows or _calculate\
 
 ##### 3.2 Select target district using `ogr2ogr` [1pt]
 Select the Slovenian district with the name "Koper" from the GeoPackage _gadm36\_SVN.gpkg_ and save it as a new ESRI Shapefile file called _koper.shp_. Add the command in a new line to the _calculate\_slope_ script. 
-
+```shell
+ogr2ogr -sql "select * from gadm36_SVN_2 where NAME_2='Izola'" -f "ESRI Shapefile" koper.shp data/gadm36_SVN.gpkg
+```
 **Hint:** Take a look at the examples given in the [ogr2ogr documentation](https://gdal.org/programs/ogr2ogr.html). 
 
 Verify that the resulting koper.shp file contains exactly one feature by executing the command 
 
-```
+```shell
 $ ogrinfo koper.shp koper -so 
 ```
 
 ##### 3.3. Clip the DEM to district. [1pt]
 
 Clip the merged DEM _dem\_merge.tif_ to the selected district in _koper.shp_ and convert it to the coordinate reference system EPSG:32632. Do both in one command using the GDAL tool `gdalwarp`.
-
+```shell
+gdalwarp -overwrite -cutline koper.shp -crop_to_cutline  -s_srs EPSG:4326 -t_srs EPSG:32632 dem_merge.tif dem_merge_clip.tif
+```
 ##### 3.4 Calculate the slope  [1pt]
 
 Calculate the slope of the DEM file using a GDAL command. Add the command in a new line to the _calculate\_slope\_hillshade_ script. 
-
+```shell
+gdaldem slope dem_merge_clip.tif dem_merge_clip_slope.tif
+```
 ##### 3.5 Create a hillshade image [1pt]
 
 Create a hill shade image based on the DEM using a GDAL command. Add the command in a new line to the _calculate\_slope\_hillshade_ script. 
-
+```shell
+gdaldem hillshade dem_merge_clip_slope.tif dem_merge_clip_slope_hillshade.tif
+```
 ##### 3.6 Execute the script [1pt]
 
 Replace the district 'Koper' in your script with 'Izola'. Save the script and run it by executing the command `calculate_slope.bat` [Windows] or `./calculate_slope.sh ` [Linux/Mac OS]. You should get the slope and hill shade files for the district of Izola. 
